@@ -3,7 +3,7 @@ layout: post
 title: Java 四种线程池
 
 category: 并发
-tags: [thread] 
+tags: thread 
 date: 2018-11-24
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title: SpringMvc事件发布处理流程
 category: SpringMvc系列
-tags: SpringMvc
+tags: springmvc
 date: 2019-06-26
 description: SpringMvc事件发布处理流程
 ---

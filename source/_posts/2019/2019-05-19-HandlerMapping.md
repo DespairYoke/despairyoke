@@ -2,7 +2,7 @@
 layout: post
 title: springMvc请求如何获取相关HandlerMapping（四）
 category: SpringMvc系列
-tags: SpringMvc
+tags: springmvc
 date: 2019-05-19
 description: springMvc请求如何获取相关HandlerMapping
 ---

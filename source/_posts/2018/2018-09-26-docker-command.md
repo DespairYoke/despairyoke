@@ -2,7 +2,7 @@
 layout:     post
 title:      docker基础命令使用
 category: Docker
-tags: docker命令
+tags: docker
 date: 2018-09-26
 description: 记录docker平常使用的命令
 ---

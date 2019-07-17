@@ -2,7 +2,7 @@
 layout: post
 title: SpringMvc初始化handlerMapping（二）
 category: SpringMvc系列
-tags: SpringMvc
+tags: springmvc
 date: 2019-05-17
 description: SpringMvc初始化handlerMapping
 ---

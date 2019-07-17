@@ -3,7 +3,7 @@ layout: post
 title: spring mvc Rest 处理流程
 
 category: SpringMvc系列
-tags: SpringMvc
+tags: springmvc
 date: 2019-03-26
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title: SpringMvc从Servlet到DispatcherServlet（一）
 category: SpringMvc系列
-tags: SpringMvc
+tags: springmvc
 date: 2019-05-16
 description: springMvc从Servlet到DispatcherServlet
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: SpringMvc初始化ViewResolver（九）
 category: SpringMvc系列
-tags: SpringMvc
+tags: springmvc
 date: 2019-05-24
 description: SpringMvc初始化ViewResolver
 ---

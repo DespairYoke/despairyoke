@@ -2,7 +2,7 @@
 layout: post
 title: SpringMvc中HandlerMethodReturnValueHandler对结果处理（八）
 category: SpringMvc系列
-tags: SpringMvc
+tags: springmvc
 date: 2019-05-23
 description: SpringMvc中HandlerMethodReturnValueHandler对结果处理
 ---

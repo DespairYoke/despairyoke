@@ -2,7 +2,7 @@
 layout: post
 title: SpringMvc初始化HandlerAdapters（五）
 category: SpringMvc系列
-tags: SpringMvc
+tags: springmvc
 date: 2019-05-20
 description: springMvc初始化HandlerAdapters
 ---

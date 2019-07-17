@@ -3,7 +3,7 @@ layout: post
 title: BeanFactory还是ApplicationContext及Aware的使用
 category: SpringMvc系列
 
-tags: SpringMvc
+tags: springmvc
 date: 2018-12-17
 ---
 

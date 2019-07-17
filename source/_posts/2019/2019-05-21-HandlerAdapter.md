@@ -2,7 +2,7 @@
 layout: post
 title: HandlerAdapter handle方法使用（六）
 category: SpringMvc系列
-tags: SpringMvc
+tags: springmvc
 date: 2019-05-21
 description: HandlerAdapter handle方法使用
 ---

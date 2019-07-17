@@ -2,7 +2,7 @@
 layout: post
 title:  java注解
 category: SpringMvc系列
-tags: SpringMvc
+tags: springmvc
 date: 2019-05-25
 description: java注解
 ---

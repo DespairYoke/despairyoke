@@ -2,7 +2,7 @@
 layout: post
 title: SpringMvc如何处理ModelAndView（十一）
 category: SpringMvc系列
-tags: SpringMvc
+tags: springmvc
 date: 2019-05-26
 description: SpringMvc如何处理ModelAndView
 ---

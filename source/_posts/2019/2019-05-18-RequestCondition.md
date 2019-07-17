@@ -2,7 +2,7 @@
 layout: post
 title: SpringMvc中RequestCondition的作用（三）
 category: SpringMvc系列
-tags: SpringMvc
+tags: springmvc
 date: 2019-05-18
 description: sSpringMvc中RequestCondition的作用
 ---
