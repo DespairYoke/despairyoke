@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring核心注解分类
-category: Springboot编程思想读书笔记
+category: Spring源码阅读笔记
 toc: true
 tags: annotation
 ---

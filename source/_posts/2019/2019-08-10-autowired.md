@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Springboot中@Autowired的原理解析
-category: Springboot编程思想读书笔记
+category: Spring源码阅读笔记
 tags: annotation
 toc: true
 ---

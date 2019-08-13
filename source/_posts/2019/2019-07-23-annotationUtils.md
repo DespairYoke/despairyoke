@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 从AnnotationConfigUtils看beanFactory的初始化
-category: Springboot编程思想读书笔记
+category: Spring源码阅读笔记
 tags: annotation
 ---
 
