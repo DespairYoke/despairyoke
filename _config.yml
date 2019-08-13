@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 朱卫东
-subtitle: DespairYoke
-description: 大道至简。
+title: DespairYoke
+subtitle: 朱卫东的个人博客
+description: 大道至简,技术如哥。
 keywords:
 author: John Doe
 language: zh-CN
@@ -13,7 +13,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://www.despairyoke.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -76,9 +76,24 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: maupassant
 
+
+
+
+baidu_url_submit:
+  count: 200  #比如200，代表提交最新的200个链接
+  host: www.despairyoke.com # 在百度站长平台中注册的域名，这个改为你自己的域名
+  token: HmvQnH9pmg6MNkOP # 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!
+  path: baidu_urls.txt # 文本文档的地址， 新链接会保存在此文本文档里，这个默认
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: git@github.com:DespairYoke/DespairYoke.github.io.git
+#  type: git
+#  repo: git@github.com:DespairYoke/DespairYoke.github.io.git
+#  branch: master
+
+- type: git
+  repository:
+#    github: git@github.com:DespairYoke/DespairYoke.github.io.git
+    coding: https://git.dev.tencent.com/despairyoke/despairyoke.git
   branch: master
+- type: baidu_url_submitter

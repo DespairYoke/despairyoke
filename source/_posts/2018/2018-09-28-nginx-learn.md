@@ -1,10 +1,11 @@
 ---
 layout: post
 title: nginx学习汇总
-catagory: linux命令
+category: linux
 tags: linux
 date: 2018-09-28
 ---
+
 ## 配置网络监听
 
 - 配置监听IP地址
