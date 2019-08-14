@@ -1,7 +1,6 @@
 ---
 layout: post
-tiltle: rabbitmq发布与订阅
-
+title: rabbitmq发布与订阅
 category: springboot
 tags: [springboot]
 date: 2018-11-20
