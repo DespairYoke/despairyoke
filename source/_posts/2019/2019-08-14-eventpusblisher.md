@@ -1,4 +1,9 @@
-
+---
+layout: post
+title: springboot2.0实战中如何使用事件发布？
+category: springboot
+tags: springboot
+---
 
 示例：模拟商家订单。当商家接收到下单请求时，触发订单事件，进行订单派送。
 ### 定义事件监听器ApplicationListener
@@ -31,6 +36,8 @@ public class HelloController {
 
 	@Autowired
 	private ApplicationEventPublisher eventPublisher;
+	
+	
 	@GetMapping(value = "/")
 	public void index() {
 		eventPublisher.publishEvent(new OrderEvent("34324234234"));

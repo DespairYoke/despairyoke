@@ -34,3 +34,23 @@ scp -r local_folder remote_ip:remote_folder
 scp root@www.runoob.com:/home/root/others/music /home/space/music/1.mp3 
 scp -r www.runoob.com:/home/root/others/ /home/space/music/
 ```
+
+### 文件和目录查找
+
+```
+查找目录：find /（查找范围） -name '查找关键字' -type d
+查找文件：find /（查找范围） -name 查找关键字 -print
+
+```
+### cat命令
+```
+查看文件所有内容（如果太长一般只显示后面一部分）  cat filename.txt
+
+查看文件前100行  cat filename.txt | head -n 100
+
+查看文件后50行   cat filename.txt | tail -n 50
+
+从1000行开始显示，也就是显示1000行以后的   tail -n +1000
+
+显示1000行到3000行内容   cat filename.txt |head -n 3000 | tail -n +1000
+```

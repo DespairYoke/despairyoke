@@ -72,6 +72,7 @@ server.port=8082
 server.port=8081
 ```
 这里我创建了三个配置文件做为演示，配置文件的内容如上,只是做了简单的启动端口替换。文件的选择是通过`applicaiton.properties`来控制，我具体代码如下：
+application-prod.properties application-test.properties application-dev.properties
 ``` yml
 spring.profiles.active=test
 ```
