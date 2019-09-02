@@ -2,7 +2,9 @@
 layout: post
 title: java动态代理
 category: Other
-tags: JDKProxy
+tags: 
+    - JDKProxy
+    - aop
 date: 2018-10-02
 ---
 
