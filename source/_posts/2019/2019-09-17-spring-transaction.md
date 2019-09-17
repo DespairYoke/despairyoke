@@ -3,6 +3,7 @@ layout: post
 title: spring事务处理流程
 category: Spring源码阅读笔记
 date: 2019-09-10
+tags: log
 ---
 
 ### 开启事务
