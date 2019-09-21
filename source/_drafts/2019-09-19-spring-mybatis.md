@@ -112,3 +112,110 @@ XMLMapperBuilder#parse
     }
 ```
 可见是对xml内容进行一步一步解析，这里不展开，有兴趣的可以自己去解读。
+
+### Spring使用mybatis
+在使用的过程中，我们创建的Mapper 都是接口，并没有实现类，而我们调用方法时，也没有报错，这很容易联想到再学习动态代理时，接口代理必须要用到JDKProxy。所以这里的Mapper 会生成一个代理对象去执行。
+![](image/spring-mybatis-01.png)
+由图可知，userMapper与MapperProxy是有关联关系。（本人理解: 从编写过原始的mybatis示例中，见到过如下代码）
+```java
+ ClassPathXmlApplicationContext  ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+    SqlSession sqlSession = (SqlSession) ctx.getBean("sqlSession");
+
+
+    UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+    User user = userMapper.selectUserById(1);
+```
+而sqlSession.getMapper(UserMapper.class);的代码如下
+```java
+public <T> T getMapper(Class<T> type, SqlSession sqlSession) {
+final MapperProxyFactory<T> mapperProxyFactory = (MapperProxyFactory<T>) knownMappers.get(type);
+if (mapperProxyFactory == null) {
+  throw new BindingException("Type " + type + " is not known to the MapperRegistry.");
+}
+try {
+  return mapperProxyFactory.newInstance(sqlSession);
+} catch (Exception e) {
+  throw new BindingException("Error getting mapper instance. Cause: " + e, e);
+}
+}
+```
+mapperProxyFactory.newInstance(sqlSession);
+```java
+public T newInstance(SqlSession sqlSession) {
+final MapperProxy<T> mapperProxy = new MapperProxy<T>(sqlSession, mapperInterface, methodCache);
+return newInstance(mapperProxy);
+}
+```
+所以我猜此可能是spring也应该是如此 debug一下 newInstance 看下调用栈
+![](image/spring-mybatis-02.png)
+
+![](image/spring-mybatis-03.png)
+
+果然在创建Mapper的时候调用了ibatis的getMapper 而 MapperRegistry 已经放置好了xml加载后的集合。此时，只需要创建一个MapperProxy。
+当我们请求时，MapperProxy的拦截方法会执行。
+```java
+public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+try {
+  if (Object.class.equals(method.getDeclaringClass())) {
+    return method.invoke(this, args);
+  } else if (isDefaultMethod(method)) {
+    return invokeDefaultMethod(proxy, method, args);
+  }
+} catch (Throwable t) {
+  throw ExceptionUtil.unwrapThrowable(t);
+}
+final MapperMethod mapperMethod = cachedMapperMethod(method);
+return mapperMethod.execute(sqlSession, args);
+}
+```
+根据不同的请求语句进行不同的拦截。
+```java
+  public Object execute(SqlSession sqlSession, Object[] args) {
+    Object result;
+    switch (command.getType()) {
+      case INSERT: {
+      Object param = method.convertArgsToSqlCommandParam(args);
+        result = rowCountResult(sqlSession.insert(command.getName(), param));
+        break;
+      }
+      case UPDATE: {
+        Object param = method.convertArgsToSqlCommandParam(args);
+        result = rowCountResult(sqlSession.update(command.getName(), param));
+        break;
+      }
+      case DELETE: {
+        Object param = method.convertArgsToSqlCommandParam(args);
+        result = rowCountResult(sqlSession.delete(command.getName(), param));
+        break;
+      }
+      case SELECT:
+        if (method.returnsVoid() && method.hasResultHandler()) {
+          executeWithResultHandler(sqlSession, args);
+          result = null;
+        } else if (method.returnsMany()) {
+          result = executeForMany(sqlSession, args);
+        } else if (method.returnsMap()) {
+          result = executeForMap(sqlSession, args);
+        } else if (method.returnsCursor()) {
+          result = executeForCursor(sqlSession, args);
+        } else {
+          Object param = method.convertArgsToSqlCommandParam(args);
+          result = sqlSession.selectOne(command.getName(), param);
+        }
+        break;
+      case FLUSH:
+        result = sqlSession.flushStatements();
+        break;
+      default:
+        throw new BindingException("Unknown execution method for: " + command.getName());
+    }
+    if (result == null && method.getReturnType().isPrimitive() && !method.returnsVoid()) {
+      throw new BindingException("Mapper method '" + command.getName() 
+          + " attempted to return null from a method with a primitive return type (" + method.getReturnType() + ").");
+    }
+    return result;
+  }
+
+```
