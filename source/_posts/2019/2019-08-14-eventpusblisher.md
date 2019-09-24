@@ -3,6 +3,7 @@ layout: post
 title: springboot2.0实战中如何使用事件发布？
 category: springboot
 tags: springboot
+date: 2019-08-14
 ---
 
 示例：模拟商家订单。当商家接收到下单请求时，触发订单事件，进行订单派送。

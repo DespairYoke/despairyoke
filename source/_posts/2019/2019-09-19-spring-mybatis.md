@@ -115,7 +115,7 @@ XMLMapperBuilder#parse
 
 ### Spring使用mybatis
 在使用的过程中，我们创建的Mapper 都是接口，并没有实现类，而我们调用方法时，也没有报错，这很容易联想到再学习动态代理时，接口代理必须要用到JDKProxy。所以这里的Mapper 会生成一个代理对象去执行。
-![](image/spring-mybatis-01.png)
+![](/image/spring-mybatis-01.png)
 由图可知，userMapper与MapperProxy是有关联关系。（本人理解: 从编写过原始的mybatis示例中，见到过如下代码）
 ```java
  ClassPathXmlApplicationContext  ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -149,9 +149,9 @@ return newInstance(mapperProxy);
 }
 ```
 所以我猜此可能是spring也应该是如此 debug一下 newInstance 看下调用栈
-![](image/spring-mybatis-02.png)
+![](/image/spring-mybatis-02.png)
 
-![](image/spring-mybatis-03.png)
+![](/image/spring-mybatis-03.png)
 
 果然在创建Mapper的时候调用了ibatis的getMapper 而 MapperRegistry 已经放置好了xml加载后的集合。此时，只需要创建一个MapperProxy。
 当我们请求时，MapperProxy的拦截方法会执行。
@@ -218,4 +218,83 @@ return mapperMethod.execute(sqlSession, args);
     return result;
   }
 
+```
+当Service执行完成后，会执行提交或回滚操作。
+```java
+if (txAttr == null || !(tm instanceof CallbackPreferringPlatformTransactionManager)) {
+    // Standard transaction demarcation with getTransaction and commit/rollback calls.
+    TransactionInfo txInfo = createTransactionIfNecessary(tm, txAttr, joinpointIdentification);
+
+    Object retVal;
+    try {
+        // This is an around advice: Invoke the next interceptor in the chain.
+        // This will normally result in a target object being invoked.
+        retVal = invocation.proceedWithInvocation();
+    }
+    catch (Throwable ex) {
+        // target invocation exception
+        completeTransactionAfterThrowing(txInfo, ex);
+        throw ex;
+    }
+    finally {
+        cleanupTransactionInfo(txInfo);
+    }
+    commitTransactionAfterReturning(txInfo);
+    return retVal;
+}
+```
+不知道为什么会执行到这里的可以看下
+[spring事务处理流程](https://www.despairyoke.com/2019/09/17/2019/2019-09-17-spring-transaction/)
+
+commitTransactionAfterReturning(txInfo);
+```java
+protected void commitTransactionAfterReturning(@Nullable TransactionInfo txInfo) {
+    if (txInfo != null && txInfo.getTransactionStatus() != null) {
+        if (logger.isTraceEnabled()) {
+            logger.trace("Completing transaction for [" + txInfo.getJoinpointIdentification() + "]");
+        }
+        txInfo.getTransactionManager().commit(txInfo.getTransactionStatus());
+    }
+}
+```
+一系列调用栈后会执行
+ ```java
+  public void beforeCommit(boolean readOnly) {
+          this.holder.getSqlSession().commit();
+        
+    }
+```
+这个sqlSeesion 没有配置，则取默认的 DefaultSqlSession
+然后执行commit
+```java
+  @Override
+  public void commit() {
+    commit(false);
+  }
+
+  @Override
+  public void commit(boolean force) {
+    try {
+      executor.commit(isCommitOrRollbackRequired(force));
+      dirty = false;
+    } catch (Exception e) {
+      throw ExceptionFactory.wrapException("Error committing transaction.  Cause: " + e, e);
+    } finally {
+      ErrorContext.instance().reset();
+    }
+  }
+```
+baseExector#commit
+![](/image/spring-mybatis-04.png)
+
+最终执行完Mybatis事务
+```java
+  public void commit() throws SQLException {
+    if (connection != null && !connection.getAutoCommit()) {
+      if (log.isDebugEnabled()) {
+        log.debug("Committing JDBC Connection [" + connection + "]");
+      }
+      connection.commit();
+    }
+  }
 ```

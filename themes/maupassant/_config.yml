@@ -17,15 +17,15 @@ gitalk:
   client_secret: 'e88fcfeb88f7ecd2d01fd9175c2bd986866c33c0'
   admin:  ## Github repo owner and collaborators, only these guys can initialize github issues.
 valine: ## https://valine.js.org
-  enable: false ## If you want to use Valine comment system, please set the value to true.
-  appid: ## Your LeanCloud application App ID, e.g. pRBBL2JR4N7kLEGojrF0MsSs-gzGzoHsz
-  appkey: ## Your LeanCloud application App Key, e.g. tjczHpDfhjYDSYddzymYK1JJ
-  notify: false ## Mail notifier, see https://github.com/xCss/Valine/wiki/Valine-评论系统中的邮件提醒设置
-  verify: false ## Validation code.
-  placeholder: Just so so ## Comment box placeholders.
-  avatar: 'mm' ## Gravatar type, see https://github.com/xCss/Valine/wiki/avatar-setting-for-valine
-  pageSize: 10 ## Number of comments per page.
-  guest_info: nick,mail,link ## Attributes of reviewers.
+  enable: true
+  appid: gRGtywbIQiKwSrctTu7r0ifj-gzGzoHsz
+  appkey: nAMw7AQ3scsw9wQopzugBy5F
+  notify: false # Mail notifier, see https://github.com/xCss/Valine/wiki/Valine-评论系统中的邮件提醒设置
+  verify: false # Validation code.
+  placeholder: 请在此输入你的留言
+  avatar: 'mm' # Gravatar type, see https://github.com/xCss/Valine/wiki/avatar-setting-for-valine
+  pageSize: 10 # Number of comments per page.
+  guest_info: nick,mail,link # Attributes of reviewers.
 
 google_search: false ## Use Google search, true/false.
 baidu_search: true ## Use Baidu search, true/false.
@@ -89,8 +89,8 @@ widgets: ## Six widgets in sidebar provided: search, category, tag, recent_posts
 links:
   - title: haoxiaoyong
     url: https://www.haoxiaoyong.cn
-  - title: site-name2
-    url: http://www.example2.com/
+  - title: houtinbin
+    url: https://htb58.github.io/
   - title: site-name3
     url: http://www.example3.com/
 
