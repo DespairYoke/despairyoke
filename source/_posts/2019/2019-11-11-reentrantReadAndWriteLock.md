@@ -93,7 +93,7 @@ ReentrantReadWriteLock默认是非公平锁
     }
 ```
 
-![Lock流程图]((/image/2019-11-11-reentrantReadAndWriteLock-01.png)
+![Lock流程图](/image/2019-11-11-reentrant-01.png)
 
 #### Lock函数
 ```java
