@@ -46,7 +46,7 @@ runoob@runoob:~/mysql$ docker pull mysql:5.6
 
 ```
 runoob@runoob:~/mysql$ docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
-21cb89213c93d805c5bacf1028a0da7b5c5852761ba81327e6b99bb3ea89930e
+[imageId]
 ```
  
 命令说明：

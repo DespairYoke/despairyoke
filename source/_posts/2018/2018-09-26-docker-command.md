@@ -27,7 +27,10 @@ docker images
 
 ```
 docker run [imageID]
+
+docker run -p 9090:3306 --name mymysql [imageID]
 ```
+-p 9090:3306：将容器的 3306 端口映射到主机的 9090 端口。
 
 #### 后台生成容器：
 ```
